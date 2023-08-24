@@ -12,9 +12,7 @@ const   firstName = document.querySelector('#firstName'),
         emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/,
         passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-submitBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-
+firstName.addEventListener('input', fn = () =>{
   if (firstName.value === '') {
     fnErrorMsg.innerText = 'Please enter your first name';
     fnErrorMsg.classList.add('error');
@@ -23,8 +21,10 @@ submitBtn.addEventListener('click', (e) => {
     fnErrorMsg.classList.add('error');
   } else {
     fnErrorMsg.innerText = '';
-  }
+  } 
+})
 
+lastName.addEventListener('input', ln =() =>{
   if (lastName.value === '') {
     lnErrorMsg.innerText = 'Please enter your last name';
     lnErrorMsg.classList.add('error');
@@ -34,7 +34,9 @@ submitBtn.addEventListener('click', (e) => {
   }else{
     lnErrorMsg.innerText = '';
   }
+})
 
+email.addEventListener('input', emailfunc = () =>{
   if (email.value === '') {
     emailErrorMsg.innerText = 'Please enter your email address';
     emailErrorMsg.classList.add('error');
@@ -47,7 +49,9 @@ submitBtn.addEventListener('click', (e) => {
   }else{
     emailErrorMsg.innerText = '';
   }
+})
 
+password.addEventListener('input', pass =()=>{
   if (password.value === '') {
     passwordErrorMsg.innerText = 'Please enter a password';
     passwordErrorMsg.classList.add('error');
@@ -57,14 +61,20 @@ submitBtn.addEventListener('click', (e) => {
   }else{
     passwordErrorMsg.innerText = '';
   }
+})
 
+confirmPassword.addEventListener('input', confirmPass =()=>{ 
   if (confirmPassword.value !== password.value) {
     confirmPasswordErrorMsg.innerText = "Password don't match";
     confirmPasswordErrorMsg.classList.add('error');
   } else{
     confirmPasswordErrorMsg.innerText = '';
   }
- 
+} )
+
+submitBtn.addEventListener('click', (e) => {
+  e.preventDefault(); fn(); ln(); emailfunc();
+  pass();confirmPass();
 });
 
 const showHiddenPass = (passwordInput, eye) =>{
@@ -89,7 +99,7 @@ const showHiddenPass = (passwordInput, eye) =>{
  showHiddenPass('passwordInput','eye')
 
  const showHiddenConfirmPass = (confirmPasswordInput, confirmEye) =>{
-    const confirmPassword = document.querySelector('#confirmPasswordInput'),
+   const confirmPassword = document.querySelector('#confirmPasswordInput'),
           confirmIconEye = document.querySelector('#confirmEye')
  
     confirmIconEye.addEventListener('click', () =>{
